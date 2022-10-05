@@ -43,6 +43,7 @@
     "toggle_navigation": "Toggle folder navigation",
     "display_mode_list": "Display documents in list",
     "display_mode_grid": "Display documents in grid",
+    "display_mode_filter": "Filter documents",
     "search_simple": "Simple search",
     "search_fulltext": "Fulltext search",
     "search_creator": "Creator",
@@ -122,7 +123,9 @@
         "upload_new_version": "Upload a new version",
         "open_versions": "Show version history",
         "display_mode_list": "Display files in list",
-        "display_mode_grid": "Display files in grid"
+        "display_mode_grid": "Display files in grid",
+        "display_mode_filter": "Filter files"
+
       },
       "workflow": {
         "workflow": "Workflow",

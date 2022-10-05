@@ -58,6 +58,12 @@
         ng-click="displayMode = 'grid'">
             <span class="fas fa-th"></span>
           </span>
+    <span class="btn btn-default" ng-class="{ active: displayMode == 'grid' }"
+          uib-tooltip="{{ 'document.view.content.display_mode_filter' | translate }}"
+          tooltip-append-to-body="true"
+          ng-click="displayMode = 'grid'">
+              <span class="fas fa-th"></span>
+      </span>
 </div>
 
 <div class="clearfix"></div>
