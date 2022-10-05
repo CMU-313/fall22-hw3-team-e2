@@ -32,7 +32,6 @@
     "nav_documents": "Documents",
     "nav_tags": "Tags",
     "nav_users_groups": "Users & Groups",
-    "nav_progress": "Progress",
     "error_info": "{{ count }} new error{{ count > 1 ? 's' : '' }}",
     "logged_as": "Logged in as {{ username }}",
     "nav_settings": "Settings",
@@ -44,6 +43,7 @@
     "toggle_navigation": "Toggle folder navigation",
     "display_mode_list": "Display documents in list",
     "display_mode_grid": "Display documents in grid",
+    "display_mode_filter": "Filter documents",
     "search_simple": "Simple search",
     "search_fulltext": "Fulltext search",
     "search_creator": "Creator",
@@ -67,7 +67,6 @@
     "shared": "Shared",
     "current_step_name": "Current step",
     "title": "Title",
-    "progress": "Progress",
     "description": "Description",
     "contributors": "Contributors",
     "language": "Language",
@@ -81,6 +80,10 @@
     "coverage": "Coverage",
     "rights": "Rights",
     "relations": "Relations",
+    "filter_option": "Filter option",
+    "in_progress": "In Progress",
+    "in_review": "In Review",
+    "done": "Done",
     "page_size": "Page size",
     "page_size_10": "10 per page",
     "page_size_20": "20 per page",
@@ -124,7 +127,9 @@
         "upload_new_version": "Upload a new version",
         "open_versions": "Show version history",
         "display_mode_list": "Display files in list",
-        "display_mode_grid": "Display files in grid"
+        "display_mode_grid": "Display files in grid",
+        "display_mode_filter": "Filter files"
+
       },
       "workflow": {
         "workflow": "Workflow",
