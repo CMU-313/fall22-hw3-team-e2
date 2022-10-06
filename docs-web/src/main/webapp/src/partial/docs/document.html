@@ -183,15 +183,16 @@
               ng-click="displayMode = 'grid'">
             <span class="fas fa-th"></span>
           </span>
-          <div class="btn-group" uib-dropdown id="filter-document">
+          <div class="btn-group" uib-dropdown id="filter-document" ng-model="doc-progress">
             <button type="button" class="btn btn-primary" uib-dropdown-toggle>
               <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu>
-              <li><a href>{{ 'document.doc_all' | translate }}</a></li>
-              <li><a href>{{ 'document.in_review' | translate }}</a></li>
-              <li><a href>{{ 'document.in_progress' | translate }}</a></li>
-              <li><a href>{{ 'document.done' | translate }}</a></li>
+              <li value="All"><a href>{{ 'document.doc_all' | translate }}</a></li>
+              <li value="To Review"><a href>{{ 'document.to-rev' | translate }}</a></li>
+              <li value="In Progress"><a href>{{ 'document.in-prog' | translate }}</a></li>
+              <li value="Done"><a href>{{ 'document.done' | translate }}</a></li>
+              prog = {{doc-progress | json}}
             </ul>
           </div>
       </div>
@@ -260,10 +261,10 @@
             <span ng-if="search.length > 0" translate="document.search_empty" translate-values="{ search: search }"></span>
           </td>
         </tr>
-
-        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents" ng-class="{ active: $stateParams.id == document.id }">
+<!-- | filter:{progress:{doc-progress}}"-->
+        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents | filter:filterByDropdown(document.progress, doc-progress)" ng-class="{ active: $stateParams.id == document.id }">
           <td colspan="2">
-            {{ document.title }} ({{ document.file_count }})
+            {{ document.title }} ({{ document.file_count }}) {{doc-progress}}
             <span class="fas fa-share" ng-if="document.shared" uib-tooltip="{{ 'document.shared' | translate }}"></span>
             <span class="fas fa-random" ng-if="document.active_route" uib-tooltip="{{ document.current_step_name }}"></span>
             <a href="#/document/view/{{ document.id }}" target="_blank" ng-click="$event.stopPropagation()"><span class="fas fa-link"></span></a>

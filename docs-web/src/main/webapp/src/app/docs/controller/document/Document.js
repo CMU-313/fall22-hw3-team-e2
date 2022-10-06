@@ -129,6 +129,10 @@ angular.module('docs').controller('Document', function ($scope, $rootScope, $tim
     $state.go('document.view', { id: id });
   };
 
+  $scope.filterByDropdown = function (progress, filter) {
+    return filter == "All" || progress == filter; 
+  };
+
   /**
    * Returns a promise for typeahead user.
    */
