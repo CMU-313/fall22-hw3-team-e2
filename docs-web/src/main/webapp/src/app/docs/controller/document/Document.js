@@ -19,7 +19,8 @@ angular.module('docs').controller('Document', function ($scope, $rootScope, $tim
   $scope.searchDropdownAnchor = angular.element(document.querySelector('.search-dropdown-anchor'));
   $scope.paginationShown = true;
   $scope.advsearch = {};
-
+  
+  $scope.progDict = {}
   // A timeout promise is used to slow down search requests to the server
   // We keep track of it for cancellation purpose
   var timeoutPromise;
@@ -40,8 +41,16 @@ angular.module('docs').controller('Document', function ($scope, $rootScope, $tim
           $scope.documents = data.documents;
           $scope.totalDocuments = data.total;
           $scope.suggestions = data.suggestions;
+          
+          for (const document of $scope.documents) {
+            Restangular.one('document', document.id).get().then(function (data) {
+              $scope.progDict[document.id] = data.progress
+            })
+          }
+
         });
   };
+
   
   /**
    * Reload documents.
@@ -127,6 +136,12 @@ angular.module('docs').controller('Document', function ($scope, $rootScope, $tim
    */
   $scope.viewDocument = function (id) {
     $state.go('document.view', { id: id });
+  };
+
+  $scope.filterByDropdown = function (docProgress) {
+    return function(document) {
+        return docProgress == "All" || docProgress == $scope.progDict[document.id];
+    }
   };
 
   /**

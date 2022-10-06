@@ -81,6 +81,8 @@
     "rights": "Rights",
     "relations": "Relations",
     "filter_option": "Filter option",
+    "progress": "",
+    "docprogress": "",
     "in-prog": "In Progress",
     "to-rev": "To Review",
     "done": "Done",

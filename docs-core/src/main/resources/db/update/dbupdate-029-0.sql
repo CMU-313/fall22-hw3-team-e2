@@ -1,4 +1,4 @@
-alter table T_DOCUMENT
+alter table T_DOCUMENT 
 drop column DOC_PROGRESS_C;
 
 alter table T_DOCUMENT add column DOC_PROGRESS_C varchar(100);

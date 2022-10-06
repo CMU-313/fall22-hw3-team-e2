@@ -183,15 +183,15 @@
               ng-click="displayMode = 'grid'">
             <span class="fas fa-th"></span>
           </span>
-          <div class="btn-group" uib-dropdown id="filter-document">
+          <div class="btn-group" uib-dropdown id="filter-document" ng-init="docprogress='All'">
             <button type="button" class="btn btn-primary" uib-dropdown-toggle>
               <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu>
-              <li><a href>{{ 'document.doc_all' | translate }}</a></li>
-              <li><a href>{{ 'document.to-rev' | translate }}</a></li>
-              <li><a href>{{ 'document.in-prog' | translate }}</a></li>
-              <li><a href>{{ 'document.done' | translate }}</a></li>
+              <li ng-click="docprogress='All'"><a href>{{ 'document.doc_all' | translate }}</a></li>
+              <li ng-click="docprogress='To Review'"><a href>{{ 'document.to-rev' | translate }}</a></li>
+              <li ng-click="docprogress='In Progress'"><a href>{{ 'document.in-prog' | translate }}</a></li>
+              <li ng-click="docprogress='Done'"><a href>{{ 'document.done' | translate }}</a></li>
             </ul>
           </div>
       </div>
@@ -260,8 +260,7 @@
             <span ng-if="search.length > 0" translate="document.search_empty" translate-values="{ search: search }"></span>
           </td>
         </tr>
-
-        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents" ng-class="{ active: $stateParams.id == document.id }">
+        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents | filter:filterByDropdown(docprogress)" ng-class="{ active: $stateParams.id == document.id }">
           <td colspan="2">
             {{ document.title }} ({{ document.file_count }})
             <span class="fas fa-share" ng-if="document.shared" uib-tooltip="{{ 'document.shared' | translate }}"></span>
@@ -296,7 +295,7 @@
         </div>
 
         <div class="col-md-12 row">
-          <div ng-repeat-start="document in documents" class="col-md-4">
+          <div ng-repeat-start="document in documents | filter:filterByDropdown(docprogress)" class="col-md-4">
             <div class="thumbnail" ng-class="{ active: $stateParams.id == document.id }">
               <a href="#/document/view/{{ document.id }}" class="file-thumbnail">
                 <img class="img-responsive" ng-if="document.file_id" ng-src="../api/file/{{ document.file_id }}/data?size=thumb" />
