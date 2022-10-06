@@ -52,6 +52,12 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_DESCRIPTION_C", length = 4000)
     private String description;
+
+    /**
+     * Progress.
+     */
+    @Column(name = "DOC_PROGRESS_C")
+    private String progress;
     
     /**
      * Subject.
@@ -166,6 +172,14 @@ public class Document implements Loggable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
     
     public String getSubject() {

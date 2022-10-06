@@ -82,16 +82,18 @@ public class DocumentResource extends BaseResource {
      * @param context Context
      * @param title Title
      * @param description Description
+     * @param progress Progress
      * @param tagIdList Tags ID list
      * @param language Language
      * @param createDate Create date
      * @param callback Callback
      */
-    public static void add(Context context, String title, String description,
+    public static void add(Context context, String title, String description, String progress
                            Set<String> tagIdList, String language, long createDate, HttpCallback callback) {
         FormBody.Builder formBuilder = new FormBody.Builder()
                 .add("title", title)
                 .add("description", description)
+                .add("progress", progress)
                 .add("language", language)
                 .add("create_date", Long.toString(createDate));
         for( String tagId : tagIdList) {
@@ -114,16 +116,18 @@ public class DocumentResource extends BaseResource {
      * @param id ID
      * @param title Title
      * @param description Description
+     * @param progress Progress
      * @param tagIdList Tags ID list
      * @param language Language
      * @param createDate Create date
      * @param callback Callback
      */
-    public static void edit(Context context, String id, String title, String description,
+    public static void edit(Context context, String id, String title, String description, String progress,
                            Set<String> tagIdList, String language, long createDate, HttpCallback callback) {
         FormBody.Builder formBuilder = new FormBody.Builder()
                 .add("title", title)
                 .add("description", description)
+                .add("progress", progress)
                 .add("language", language)
                 .add("create_date", Long.toString(createDate));
         for( String tagId : tagIdList) {

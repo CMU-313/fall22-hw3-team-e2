@@ -54,6 +54,7 @@ public class DocumentEditActivity extends AppCompatActivity {
     // View cache
     private EditText titleEditText;
     private EditText descriptionEditText;
+    private EditText progressEditText;
     private TagsCompleteTextView tagsEditText;
     private Spinner languageSpinner;
     private DatePickerView datePickerView;
@@ -90,6 +91,7 @@ public class DocumentEditActivity extends AppCompatActivity {
         datePickerView = (DatePickerView) findViewById(R.id.dateEditText);
         titleEditText = (EditText) findViewById(R.id.titleEditText);
         descriptionEditText = (EditText) findViewById(R.id.descriptionEditText);
+        progressEditText = (EditText) findViewById(R.id.progressEditText);
 
         // Language spinner
         LanguageAdapter languageAdapter = new LanguageAdapter(this, false);
@@ -115,6 +117,9 @@ public class DocumentEditActivity extends AppCompatActivity {
         validator = new Validator(this, true);
         validator.addValidable(titleEditText, new Required());
 
+        validatorname = new Validator(this, true);
+        validatorname.addValidable(progressEditText, new Required());
+
         // Fill the activity
         if (document == null) {
             datePickerView.setDate(new Date());
@@ -122,6 +127,7 @@ public class DocumentEditActivity extends AppCompatActivity {
             setTitle(R.string.edit_document);
             titleEditText.setText(document.optString("title"));
             descriptionEditText.setText(document.isNull("description") ? "" : document.optString("description"));
+            progressEditText.setText(document.optString("progress"));
             datePickerView.setDate(new Date(document.optLong("create_date")));
             languageSpinner.setSelection(languageAdapter.getItemPosition(document.optString("language")));
             JSONArray documentTags = document.optJSONArray("tags");
@@ -146,10 +152,15 @@ public class DocumentEditActivity extends AppCompatActivity {
                 if (!validator.isValidated()) {
                     return true;
                 }
+                validatorname.validate();
+                if (!validatorname.isValidated()) {
+                    return true;
+                }
 
                 // Metadata
                 final String title = titleEditText.getText().toString();
                 final String description = descriptionEditText.getText().toString();
+                final String progress = progressEditText.getText().toString();
                 LanguageAdapter.Language language = (LanguageAdapter.Language) languageSpinner.getSelectedItem();
                 final String langId = language.getId();
                 final long createDate = datePickerView.getDate().getTime();
@@ -180,6 +191,7 @@ public class DocumentEditActivity extends AppCompatActivity {
                             }
                             outputDoc.putOpt("title", title);
                             outputDoc.putOpt("description", description);
+                            outputDoc.putOpt("progress", progress);
                             outputDoc.putOpt("language", langId);
                             outputDoc.putOpt("create_date", createDate);
                             JSONArray tags = new JSONArray();
@@ -214,9 +226,9 @@ public class DocumentEditActivity extends AppCompatActivity {
 
                 // Actual server call
                 if (document == null) {
-                    DocumentResource.add(this, title, description, tagIdList, langId, createDate, callback);
+                    DocumentResource.add(this, title, description, progress, tagIdList, langId, createDate, callback);
                 } else {
-                    DocumentResource.edit(this, document.optString("id"), title, description, tagIdList, langId, createDate, callback);
+                    DocumentResource.edit(this, document.optString("id"), title, description, progress, tagIdList, langId, createDate, callback);
                 }
                 return true;
 

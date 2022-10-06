@@ -156,6 +156,7 @@ public class DocumentViewActivity extends AppCompatActivity {
         String title = document.optString("title");
         String date = DateFormat.getDateFormat(this).format(new Date(document.optLong("create_date")));
         String description = document.optString("description");
+        String progress = document.getString("progress");
         boolean shared = document.optBoolean("shared");
         String language = document.optString("language");
         JSONArray tags = document.optJSONArray("tags");
@@ -183,6 +184,15 @@ public class DocumentViewActivity extends AppCompatActivity {
         } else {
             descriptionTextView.setVisibility(View.VISIBLE);
             descriptionTextView.setText(description);
+        }
+
+        // Progress
+        TextView progressTextView = (TextView) findViewById(R.id.progressTextView);
+        if (progress.isEmpty() || document.isNull("description")) {
+            progressTextView.setVisibility(View.GONE);
+        } else {
+            progressTextView.setVisibility(View.VISIBLE);
+            progressTextView.setText(progress);
         }
 
         // Tags
