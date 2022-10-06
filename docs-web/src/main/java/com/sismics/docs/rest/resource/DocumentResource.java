@@ -94,7 +94,7 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} id ID
      * @apiSuccess {String} title Title
      * @apiSuccess {String} description Description
-     * @apiSuccess {Number} progress Progress
+     * @apiSuccess {String} progress Progress
      * @apiSuccess {Number} create_date Create date (timestamp)
      * @apiSuccess {Number} update_date Update date (timestamp)
      * @apiSuccess {String} language Language
@@ -375,7 +375,7 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} documents.file_id Main file ID
      * @apiSuccess {String} documents.title Title
      * @apiSuccess {String} documents.description Description
-     * @apiSuccess {Number} documents.progress Progress
+     * @apiSuccess {String} documents.progress Progress
      * @apiSuccess {Number} documents.create_date Create date (timestamp)
      * @apiSuccess {Number} documents.update_date Update date (timestamp)
      * @apiSuccess {String} documents.language Language
@@ -683,7 +683,7 @@ public class DocumentResource extends BaseResource {
      * @apiGroup Document
      * @apiParam {String} title Title
      * @apiParam {String} [description] Description
-     * @apiParam {Number} [progress] Progress
+     * @apiParam {String} [progress] Progress
      * @apiParam {String} [subject] Subject
      * @apiParam {String} [identifier] Identifier
      * @apiParam {String} [publisher] Publisher
@@ -727,7 +727,7 @@ public class DocumentResource extends BaseResource {
     public Response add(
             @FormParam("title") String title,
             @FormParam("description") String description,
-            @FormParam("progress") Integer progress,
+            @FormParam("progress") String progress,
             @FormParam("subject") String subject,
             @FormParam("identifier") String identifier,
             @FormParam("publisher") String publisher,
@@ -853,7 +853,7 @@ public class DocumentResource extends BaseResource {
             @PathParam("id") String id,
             @FormParam("title") String title,
             @FormParam("description") String description,
-            @FormParam("progress") Integer progress,
+            @FormParam("progress") String progress,
             @FormParam("subject") String subject,
             @FormParam("identifier") String identifier,
             @FormParam("publisher") String publisher,
