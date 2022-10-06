@@ -1,0 +1,1 @@
+alter table T_DOCUMENT alter column DOC_PROGRESS_C type varchar(100);
