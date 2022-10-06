@@ -183,16 +183,16 @@
               ng-click="displayMode = 'grid'">
             <span class="fas fa-th"></span>
           </span>
-          <div class="btn-group" uib-dropdown id="filter-document" ng-model="doc-progress">
+          <div class="btn-group" uib-dropdown id="filter-document" ng-model="docprogress">
             <button type="button" class="btn btn-primary" uib-dropdown-toggle>
               <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu>
-              <li value="All"><a href>{{ 'document.doc_all' | translate }}</a></li>
-              <li value="To Review"><a href>{{ 'document.to-rev' | translate }}</a></li>
-              <li value="In Progress"><a href>{{ 'document.in-prog' | translate }}</a></li>
-              <li value="Done"><a href>{{ 'document.done' | translate }}</a></li>
-              prog = {{doc-progress | json}}
+              <li value="All" ng-click="docprogress=docs_all"><a href>{{ 'document.doc_all' | translate }}</a></li>
+              <li value="To Review" ng-click="docprogress=document.to-rev"><a href>{{ 'document.to-rev' | translate }}</a></li>
+              <li value="In Progress" ng-click="docprogress=in-prog"><a href>{{ 'document.in-prog' | translate }}</a></li>
+              <li value="Done" ng-click="docprogress=done"><a href>{{ 'document.done' | translate }}</a></li>
+              prog = {{docprogress | json}}
             </ul>
           </div>
       </div>
@@ -262,9 +262,9 @@
           </td>
         </tr>
 <!-- | filter:{progress:{doc-progress}}"-->
-        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents | filter:filterByDropdown(document.progress, doc-progress)" ng-class="{ active: $stateParams.id == document.id }">
+        <tr ng-click="viewDocument(document.id)" ng-repeat="document in documents | filter:filterByDropdown(document.progress, docprogress)" ng-class="{ active: $stateParams.id == document.id }">
           <td colspan="2">
-            {{ document.title }} ({{ document.file_count }}) {{doc-progress}}
+            {{ document.title }} ({{ document.file_count }}) {{docprogress}}
             <span class="fas fa-share" ng-if="document.shared" uib-tooltip="{{ 'document.shared' | translate }}"></span>
             <span class="fas fa-random" ng-if="document.active_route" uib-tooltip="{{ document.current_step_name }}"></span>
             <a href="#/document/view/{{ document.id }}" target="_blank" ng-click="$event.stopPropagation()"><span class="fas fa-link"></span></a>
