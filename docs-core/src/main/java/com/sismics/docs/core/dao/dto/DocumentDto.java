@@ -27,9 +27,9 @@ public class DocumentDto {
     private String description;
 
     /**
-     * Progress {0: Todo, 1: In Progreess, 2: Done}.
+     * Progress strings (added)
      */
-    private Integer progress;
+    private String progress;
     
     /**
      * Subject.
@@ -149,11 +149,11 @@ public class DocumentDto {
         this.description = description;
     }
 
-    public Integer getProgress() {
+    public String getProgress() {
         return progress;
     }
 
-    public void setProgress(Integer progress) {
+    public void setProgress(String progress) {
         this.progress = progress;
     }
 
