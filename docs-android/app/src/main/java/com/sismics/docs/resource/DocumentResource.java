@@ -94,7 +94,6 @@ public class DocumentResource extends BaseResource {
                 .add("title", title)
                 .add("description", description)
                 .add("progress", progress)
-                .add("progress", progress)
                 .add("language", language)
                 .add("create_date", Long.toString(createDate));
         for( String tagId : tagIdList) {

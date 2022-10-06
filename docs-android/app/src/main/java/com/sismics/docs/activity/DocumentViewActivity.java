@@ -186,6 +186,15 @@ public class DocumentViewActivity extends AppCompatActivity {
             descriptionTextView.setText(description);
         }
 
+        // Progress
+        TextView progressTextView = (TextView) findViewById(R.id.progressTextView);
+        if (progress.isEmpty() || document.isNull("description")) {
+            progressTextView.setVisibility(View.GONE);
+        } else {
+            progressTextView.setVisibility(View.VISIBLE);
+            progressTextView.setText(progress);
+        }
+
         // Tags
         TextView tagTextView = (TextView) findViewById(R.id.tagTextView);
         if (tags.length() == 0) {
