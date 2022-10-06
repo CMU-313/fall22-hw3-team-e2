@@ -110,7 +110,7 @@ public class DocumentDao {
         documentDto.setId((String) o[i++]);
         documentDto.setTitle((String) o[i++]);
         documentDto.setDescription((String) o[i++]);
-        documentDto.setProgress((Integer) o[i++]);
+        documentDto.setProgress((String) o[i++]);
         documentDto.setSubject((String) o[i++]);
         documentDto.setIdentifier((String) o[i++]);
         documentDto.setPublisher((String) o[i++]);
