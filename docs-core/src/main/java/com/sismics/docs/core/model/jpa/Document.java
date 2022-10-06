@@ -57,7 +57,7 @@ public class Document implements Loggable {
      * Progress.
      */
     @Column(name = "DOC_PROGRESS_C")
-    private Integer progress;
+    private String progress;
     
     /**
      * Subject.
@@ -174,11 +174,11 @@ public class Document implements Loggable {
         this.description = description;
     }
 
-    public Integer getProgress() {
+    public String getProgress() {
         return progress;
     }
 
-    public void setProgress(Integer progress) {
+    public void setProgress(String progress) {
         this.progress = progress;
     }
     
