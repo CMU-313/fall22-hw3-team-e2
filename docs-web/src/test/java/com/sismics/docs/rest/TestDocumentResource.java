@@ -41,7 +41,7 @@ public class TestDocumentResource extends BaseJerseyTest {
         String title = "Title";
         String description = "A description";
         String subject = "Subject document 1";
-        String progress = "Todo";
+        String progress = "To Review";
         String identifier = "Identifier document 1";
         String publisher = "Publisher document 1";
         String format = "Format document 1";
@@ -107,7 +107,7 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertNotNull(json.get("update_date"));
 
 
-        String newProgress = "In Review";
+        String newProgress = "In Progress";
 
         // Update document 1 with new progres
         json = target().path("/document/" + document1Id).request()
