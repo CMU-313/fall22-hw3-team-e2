@@ -27,6 +27,103 @@ import java.util.Date;
  * @author bgamard
  */
 public class TestDocumentResource extends BaseJerseyTest {
+
+    /**
+     * Test the document progress attribute through REST endpoints.
+     * 
+     * @throws Exception e
+     */
+    public void testDocumentProgress() throws Exception {
+        // Login document1
+        clientUtil.createUser("document1");
+        String document1Token = clientUtil.login("document1");
+        
+        String title = "Title";
+        String description = "A description";
+        String subject = "Subject document 1";
+        String progress = "To Review";
+        String identifier = "Identifier document 1";
+        String publisher = "Publisher document 1";
+        String format = "Format document 1";
+        String source = "Source document 1";
+        String type = "Progress test";
+        String coverage = "313";
+        String rights = "Public Domain";
+        String language = "eng";
+
+        // Create a document with progress value
+        long create1Date = new Date().getTime();
+        JsonObject json = target().path("/document").request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
+                .put(Entity.form(new Form()
+                        .param("title", title)
+                        .param("description", description)
+                        .param("subject", subject)
+                        .param("progress", progress)
+                        .param("identifier", identifier)
+                        .param("publisher", publisher)
+                        .param("format", format)
+                        .param("source", source)
+                        .param("type", type)
+                        .param("coverage", coverage)
+                        .param("rights", rights)
+                        .param("language", language)
+                        .param("create_date", Long.toString(create1Date))), JsonObject.class);
+        String document1Id = json.getString("id");
+        Assert.assertNotNull(document1Id);
+        
+        // List all documents and ensure one value is returned
+        json = target().path("/document/list")
+                .queryParam("sort_column", 3)
+                .queryParam("asc", true)
+                .request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
+                .get(JsonObject.class);
+        JsonArray documents = json.getJsonArray("documents");
+        Assert.assertEquals(1, documents.size());
+
+
+        // Get document 1 and check all values
+        json = target().path("/document/" + document1Id).request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
+                .get(JsonObject.class);
+        Assert.assertEquals(document1Id, json.getString("id"));
+        Assert.assertEquals("document1", json.getString("creator"));
+        Assert.assertEquals(1, json.getInt("file_count"));
+        Assert.assertTrue(json.getBoolean("shared"));
+        Assert.assertEquals(title, json.getString("title"));
+        Assert.assertEquals(description, json.getString("description"));
+        Assert.assertEquals(progress, json.getString("progress"));
+        Assert.assertEquals(subject, json.getString("subject"));
+        Assert.assertEquals(identifier, json.getString("identifier"));
+        Assert.assertEquals(publisher, json.getString("publisher"));
+        Assert.assertEquals(format, json.getString("format"));
+        Assert.assertEquals(source, json.getString("source"));
+        Assert.assertEquals(type, json.getString("type"));
+        Assert.assertEquals(coverage, json.getString("coverage"));
+        Assert.assertEquals(rights, json.getString("rights"));
+        Assert.assertEquals(language, json.getString("language"));
+        Assert.assertEquals(create1Date, json.getJsonNumber("create_date").longValue());
+        Assert.assertNotNull(json.get("update_date"));
+
+
+        String newProgress = "In Progress";
+
+        // Update document 1 with new progres
+        json = target().path("/document/" + document1Id).request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
+                .post(Entity.form(new Form().param("progress", newProgress)), 
+                        JsonObject.class);
+        Assert.assertEquals(document1Id, json.getString("id"));
+
+        // CHeck that progress is properly updated
+        json = target().path("/document/" + document1Id).request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
+                .get(JsonObject.class);
+        Assert.assertTrue(json.getString("progress").contains(newProgress));
+    }
+
+
     /**
      * Test the document resource.
      * 
