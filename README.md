@@ -14,13 +14,15 @@ Teedy is an open source, lightweight document management system for individuals 
 
 # Homework 3 Documentation
 
-For our new feature, we implemented a new `Progress` attribute for reviewing. Graduate admission staff are able to mark documents' progress as `To Review`, `In Progress`, and `Done` to properly indicate where they are in the review process for each. Additionally, users can filter all documents by each of the three progress levels. To use our feature, add documents as you normally would and select one of the following radio buttons (as seen in Figure 1. We decided to leave the field as optional since it is likely that some documemnts will not have to be reviewed. After adding documents, use the right dropdown menu in the documents list card as shown in Figurre 2 to filter between each of the progress levels. We believe that this is a significant improvement to the usability of Teedy for the admissions process.
+For our new feature, we implemented a new `Progress` attribute for document reviewing. Graduate admission staff are able to mark documents' progress as `To Review`, `In Progress`, and `Done` to properly indicate where they are in the review process for each. Additionally, users can filter all documents by each of the three progress levels. To use our feature, add documents as you normally would and select one of the following radio buttons (as seen in Figure 1). We decided to leave the field as optional since it is likely that some documents will not have to be reviewed. After adding documents, use the right dropdown menu in the documents list card as shown in Figure 2 to filter between each of the progress levels. We believe that this is a significant improvement to the usability of Teedy for the admissions process.
 
 
 ![image](https://user-images.githubusercontent.com/57329141/194463746-de16c8de-7983-46a6-87cb-f19418d21d02.png)
+
 *Figure 1: New Progress attribute radio buttons*
 
 ![image](https://user-images.githubusercontent.com/57329141/194463250-e61bb34c-fe45-4ec7-ba8d-e8131a17a61f.png)
+
 *Figure 2: Dropdown filtering*
 
 
